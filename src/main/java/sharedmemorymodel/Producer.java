@@ -25,7 +25,7 @@ public class Producer implements Runnable {
 
         for (CommunicationItem ci : items) {
 
-            System.out.println("*BEGIN-------------------------------------------------------*");
+            System.out.println("*-BEGIN----------------------------------------------------------------------------*");
             ThreadHelper.createPrint(Thread.currentThread().getName(), "Pushing a request to BoundedBuffer", ci);
             this.buffer.pushCommunicationItem(ci);
 
@@ -38,7 +38,7 @@ public class Producer implements Runnable {
 
             CommunicationItem item = this.buffer.getCommunicationItem();
             ThreadHelper.createPrint(Thread.currentThread().getName(), "Received a request from BoundedBuffer", item);
-            System.out.println("*END---------------------------------------------------------*");
+            System.out.println("*-END------------------------------------------------------------------------------*");
 
             try {
                 Thread.sleep(100);
