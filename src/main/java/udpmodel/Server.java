@@ -6,11 +6,32 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.Arrays;
 
+/**
+ * This class provides an implementation of the Server in the UDP model.
+ * The Server continuously receives packets from the Client and responds.
+ *
+ * @author Tony Abou Zeidan
+ * @version 2/8/2022
+ */
 public class Server {
 
+    /**
+     * Send and receive packets
+     */
     DatagramPacket receivePacket, sendPacket;
+
+    /**
+     * Sockets for sending and retrieving
+     */
     DatagramSocket receiveSocket, sendSocket;
 
+    /**
+     * Default constructor for instances of Client.
+     * Initializes a new Server ready to await packets from the Client.
+     *
+     * @param receive_port The port that the Server will receive packets from
+     * @param send_port The port that the Server will send packets from
+     */
     public Server(int receive_port, int send_port) {
 
         try {
@@ -22,6 +43,10 @@ public class Server {
         }
     }
 
+    /**
+     * This function awaits a packet from the Client and attempts to reply
+     * to the Client.
+     */
     public void sendReceive() {
 
         byte[] receiveData = new byte[100];
@@ -69,6 +94,11 @@ public class Server {
         System.out.println("Packet sent.");
     }
 
+    /**
+     * Executable, should be running before Client is run.
+     *
+     * @param args Unused
+     */
     public static void main(String[] args) {
         Server server = new Server(62, 69);
 
