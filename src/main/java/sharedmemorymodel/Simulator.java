@@ -1,7 +1,18 @@
 package sharedmemorymodel;
 
+/**
+ * This class provides an a way for the SharedMemoryModel to be run.
+ *
+ * @author Tony Abou Zeidan
+ * @version 2/8/2022
+ */
 public class Simulator {
 
+    /**
+     * Executable for the model.
+     *
+     * @param args Not used
+     */
     public static void main(String[] args) {
 
         BoundedBuffer buffer = new BoundedBuffer();

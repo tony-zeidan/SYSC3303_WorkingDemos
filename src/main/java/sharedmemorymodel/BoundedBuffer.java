@@ -1,26 +1,53 @@
 package sharedmemorymodel;
 
-import java.util.LinkedList;
-import java.util.List;
-
+/**
+ * This class provides an implementation for the BoundedBuffer in the Shared Memory Model.
+ * The BoundedBuffer acts as a communication link/shared memory for the Consumer and Producer Threads.
+ *
+ * The BoundedBuffer can be implemented in many ways.
+ * In this implementation, the BoundedBuffer uses a circular array of CommunicationItems.
+ * These CommunicationItems are objects that Producer and Consumer Threads write data to and read data from.
+ *
+ * @author Tony Abou Zeidan
+ * @version 2/8/2022
+ */
 public class BoundedBuffer {
 
-    private boolean writeable;
-    private boolean readable;
+    /**
+     * Whether the buffer can be written to or not and read from or not
+     */
+    private boolean writeable, readable;
 
+    /**
+     * The max size of the circular buffer array
+     */
     private static final int MAX_SIZE = 5;
 
+    /**
+     * The circular buffer array
+     */
     private CommunicationItem[] buffer;
-    private int inIndex = 0;
-    private int outIndex = 0;
-    private int size = 0;
 
+    /**
+     * The index to write to, read from, and the number of elements in the circular array
+     */
+    private int inIndex, outIndex, size = 0;
+
+    /**
+     * Default constructor for instances of BoundedBuffer.
+     * Initializes a new BoundedBuffer that can be written to and not read from.
+     */
     public BoundedBuffer() {
         buffer = new CommunicationItem[MAX_SIZE];
         writeable = true;
         readable = false;
     }
 
+    /**
+     * Provides Producer Threads with a way of pushing items into the buffer.
+     *
+     * @param ci The item to push to the buffer
+     */
     public synchronized void pushCommunicationItem(CommunicationItem ci) {
 
         while (!writeable) {
@@ -44,6 +71,11 @@ public class BoundedBuffer {
         notifyAll();
     }
 
+    /**
+     * Provides Consumer Threads with a way of reading items from the buffer.
+     *
+     * @return The read item
+     */
     public synchronized CommunicationItem getCommunicationItem() {
 
         while (!readable) {

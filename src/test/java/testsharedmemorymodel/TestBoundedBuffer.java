@@ -12,6 +12,9 @@ import sharedmemorymodel.CommunicationItem;
 /**
  * This class provides test cases for the BoundedBuffer class which serves
  * as a link between Consumer and Producer classes.
+ *
+ * @author Tony Abou Zeidan
+ * @version 2/8/2022
  */
 public class TestBoundedBuffer {
 
